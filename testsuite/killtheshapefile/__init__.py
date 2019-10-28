@@ -126,7 +126,7 @@ def get_fid_time(formats, fid = None, repeat=1):
         name, ext = os.path.splitext(fn)
         layer = os.path.basename(name)
         time = timeit(
-            stmt = "subprocess.run(" + str(["ogrinfo", "-fid", fid, fn, layer])+ ", stdout=subprocess.PIPE)",
+            stmt = "subprocess.run(" + str(["ogrinfo", "-qq", "-fid", fid, fn, layer])+ ", stdout=subprocess.PIPE)",
             setup = "import subprocess", number = repeat)
         duration[frmt_name] = time
 
@@ -149,7 +149,7 @@ def get_where_time(formats, where=None, repeat=1):
         name, ext = os.path.splitext(fn)
         layer = os.path.basename(name)
         time = timeit(
-            stmt = "subprocess.run(" + str(["ogrinfo", "-where", where, fn, layer])+ ", stdout=subprocess.PIPE)",
+            stmt = "subprocess.run(" + str(["ogrinfo", "-qq", "-where", where, fn, layer])+ ", stdout=subprocess.PIPE)",
             setup = "import subprocess", number = repeat)
         duration[frmt_name] = time
 
@@ -174,7 +174,7 @@ def get_spat_time(formats, spat=None, repeat=1):
         name, ext = os.path.splitext(fn)
         layer = os.path.basename(name)
         time = timeit(
-            stmt = "subprocess.run(" + str(["ogrinfo", "-spat"] + \
+            stmt = "subprocess.run(" + str(["ogrinfo", "-qq", "-spat"] + \
                 spat + [fn, layer]) + ", stdout=subprocess.PIPE)",
             setup = "import subprocess", number = repeat)
         duration[frmt_name] = time
@@ -195,7 +195,7 @@ def get_seq_time(formats, repeat=1):
         name, ext = os.path.splitext(fn)
         layer = os.path.basename(name)
         time = timeit(
-            stmt = "subprocess.run(" + str(["ogrinfo", fn, layer]) + ", stdout=subprocess.PIPE)",
+            stmt = "subprocess.run(" + str(["ogrinfo", "-qq", fn, layer]) + ", stdout=subprocess.PIPE)",
             setup = "import subprocess", number = repeat)
         duration[frmt_name] = time
 
